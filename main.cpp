@@ -79,7 +79,7 @@ class Trie {
 			return actual->esPalabra;
 		}
 
-		//Función que implementa el DFS sobre el Trie, imprimie un recorrido sobre todo el Trie recibe un apuntador a un Nodo, y no tiene valor de retorno. 
+		//Función que implementa el DFS sobre el Trie, imprimie un recorrido sobre el Trie por cada caractper, recibe un apuntador a un Nodo, y no tiene valor de retorno. 
 		void dfs(Nodo* actual) { //Complejidad Computacional: O(26) [Pasa a ser O(1)], es una ejecución lineal del contenido de la función. 
 			for (int i = 0; i < 26; i++) {
 				if (actual->hijos[i] != NULL) {
@@ -111,11 +111,13 @@ class Trie {
 //Función main de ejecución del programa, no recibe valores, retorna un valor 0 al finalizar la ejecución.
 int main() {//Complejidad Computacional: O(1), es una ejecución lineal del contenido de la función. 
 
+	cout << "---------- INICIA PROGRAMA ----------" << endl;
 	int n; //Cantidad de palabras a ingresar en el Trie
 	int m; //Cantidad de palabras a buscar dentro del Trie
 	Trie trie; //Declaración del Trie
 
 	espacio();
+	cout << "INGRESE LA CANTIDAD PALABRAS A INSERTAR EN EL TRIE: " << endl;
 	cin >> n; //Ingresa la cantidad de palabras a introducir en el Trie
 	espacio();
 
@@ -126,18 +128,18 @@ int main() {//Complejidad Computacional: O(1), es una ejecución lineal del cont
 	}
 
 	espacio();
-	espacio();
+	cout << "RECORRIDO DFS SOBRE EL TRIE [POR PALABRAS]: "
 	trie.recorridoDFSPorPalabras(trie.raiz, ""); //Se hace el recorrido del Trie por palabras
-	espacio();
-	espacio();
 
 	espacio();
-	cout << "raiz" << endl;
+	cout << "RECORRIDO DFS SOBRE EL TRIE [POR CARACTERES]: "
+	cout << "RAIZ" << endl;
 	cout << "↓" << endl;
 	trie.dfs(trie.raiz); //Se hace el recorrido del Trie por caracteres
-	cout << "fin" << endl;
+	cout << "FIN" << endl;
 	espacio();
 
+	cout << "INGRESE LA CANTIDAD PALABRAS A BUSCAR EN EL TRIE: " << endl;
 	cin >> m; //Ingresa la cantidad de palabras a buscar en el Trie
 	espacio();
 
@@ -145,9 +147,10 @@ int main() {//Complejidad Computacional: O(1), es una ejecución lineal del cont
 		string temp;
 		cin >> temp; //Escribe las palabras
 
-		cout << (trie.busqueda(temp) ? "TRUE" : "FALSE") << endl; //Se realiza la búsqueda de la palabra precisa en el Trie
+		cout << (trie.busqueda(temp) ? "TRUE - SE ENCONTRO LA PALABRA" : "FALSE - NO SE ENCONTRO LA PALABRA EXACTA") << endl; //Se realiza la búsqueda de la palabra precisa en el Trie
 		espacio();
 	}
 
+	cout << "---------- TERMINA PROGRAMA ----------" << endl;
 	return 0;
 }
