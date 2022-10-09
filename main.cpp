@@ -23,7 +23,7 @@ class Nodo {
 		bool esPalabra; //Si es lo último perteneciente a la palabra exacta, o en otras palabras: un nodo hoja.
 
 		//Constructor de la Clase Nodo
-		Nodo() { //Complejidad Computacional: O(26) [Considerada O(1), por ser constante], es una ejecución lineal del contenido de la función. 
+		Nodo() { //Complejidad Computacional: O(26) [Considerada O(1)], teniendo entonces Complejidad Constante.
 			esPalabra = false;
 			for (int i = 0; i < 26; i++) {
 				hijos[i] = NULL;
@@ -80,7 +80,7 @@ class Trie {
 		}
 
 		//Función que implementa el DFS sobre el Trie, imprime un recorrido sobre el Trie por cada caracter, recibe un apuntador a un Nodo, y no tiene valor de retorno. 
-		void dfs(Nodo* actual) { //Complejidad Computacional: O(26) [Considerada O(1), por ser constante], es una ejecución lineal del contenido de la función. 
+		void dfs(Nodo* actual) { //Complejidad Computacional: O(26) [Considerada O(1)], teniendo entonces Complejidad Constante.
 			for (int i = 0; i < 26; i++) {
 				if (actual->hijos[i] != NULL) {
 					cout << (char)(i + 'a') << endl;
@@ -91,7 +91,7 @@ class Trie {
 		}
 
 		//Función que implementa el DFS sobre el Trie, imprime las palabras en orden de recorrido, recibe un apuntador a un nodo, un string y no tiene valor de retorno. 
-		void recorridoDFSPorPalabras(Nodo* actual, string palabra) { //Complejidad Computacional: O(26) [Considerada O(1), por ser constante], es una ejecución lineal del contenido de la función. 
+		void recorridoDFSPorPalabras(Nodo* actual, string palabra) { //Complejidad Computacional: O(26) [Considerada O(1)], teniendo entonces Complejidad Constante.
 			if (actual == NULL)
 				return;
 
