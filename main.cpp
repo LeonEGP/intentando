@@ -147,7 +147,7 @@ int main() {//Complejidad Computacional: O(1), es una ejecución lineal del cont
 		string temp;
 		cin >> temp; //Escribe las palabras
 
-		cout << (trie.busqueda(temp) ? "TRUE - SE ENCONTRO LA PALABRA" : "FALSE - NO SE ENCONTRO LA PALABRA EXACTA") << endl; //Se realiza la búsqueda de la palabra precisa en el Trie
+		cout << (trie.busqueda(temp) ? "TRUE" : "FALSE") << endl; //Se realiza la búsqueda de la palabra precisa en el Trie
 		espacio();
 	}
 
