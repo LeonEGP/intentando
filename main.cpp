@@ -1,20 +1,21 @@
-#include <bits/stdc++.h>
 #include <iostream>
 #include <string>
+#include <vector>
 
 using namespace std;
 
+void espacio() {
+	cout << endl;
+}
+
 class Nodo {
 public:
-	Nodo *hijos[27];
-	bool hoja;
-	char letra;
+	Nodo *hijos[26];
+	bool esPalabra;
 
 	Nodo() {
-		hoja = false;
-		letra = '\0';
-
-		for (int i = 0; i < 27; i++) {
+		esPalabra = false;
+		for (int i = 0; i < 26; i++) {
 			hijos[i] = NULL;
 		}
 	}
@@ -22,63 +23,94 @@ public:
 
 class Trie {
 public:
-	Nodo raiz;
+
+  Nodo *raiz;
+
+	Trie() {
+		raiz = new Nodo();
+	}
 
 	void insertar(string palabra) {
-		Nodo *actual = &raiz;
+		Nodo *actual = raiz;
 
-		for (int j = 0; j < palabra.size(); j++) {
-			if (actual->hijos[palabra.at(j) - 'A'] == NULL) {
-				actual->hijos[palabra.at(j) - 'A'] = new Nodo;
-				actual->hijos[palabra.at(j) - 'A']->letra = palabra.at(j);
-			}
-			actual = actual->hijos[palabra.at(j) - 'A'];
+		for (int i = 0; i < palabra.size(); i++) {
+			int index = palabra[i] - 'a';
+			if (actual->hijos[index] == NULL) {
+				  actual->hijos[index] = new Nodo();
+			  }
+			  actual = actual->hijos[index];
 		}
-		actual->hoja = true;
+		actual->esPalabra = true;
 	}
 
-	Nodo *buscar(string palabra) {
-		Nodo *actual = &raiz;
+	bool busqueda(string palabra) {
+		Nodo *actual = raiz;
 
-		for (int k = 0; k < palabra.size(); k++) {
-			if (actual->hijos[palabra.at(k) - 'A']) {
-				actual = actual->hijos[palabra.at(k) - 'A'];
-			} else {
-				actual = NULL;
-				return actual;
+		for (int i = 0; i < palabra.size(); i++) {
+			int index = palabra[i] - 'a';
+      
+			if (actual->hijos[index] == NULL) {
+        espacio();
+				return false;
 			}
+      // Aquí
+      cout << palabra[i];
+      if (i != palabra.size()-1 && actual->hijos[index]->hijos[palabra[i+1] - 'a'] != NULL){
+        cout << "->";
+      }
+			actual = actual->hijos[index];
 		}
-		return actual;
+    espacio();
+		return actual->esPalabra;
 	}
 
-	void palabrasCon(Nodo *actual, string prefijo, string sufijo) {
-		if (actual->hoja && sufijo.size() != 0) {
-			cout << prefijo + sufijo << endl;
-		}
-		for (int l = 0; l < 27; l++) {
-			string temporal = sufijo;
-			if (actual->hijos[l]) {
-				temporal += actual->hijos[l]->letra;
-				palabrasCon(actual->hijos[l], prefijo, temporal);
-			}
-		}
-	}
+  void dfs(Nodo *actual){
+
+    for(int i = 0; i < 26; i++){
+      if (actual->hijos[i] != NULL){
+        cout << (char) (i + 'a') << endl;
+        
+        cout << "↓" << endl;
+        dfs(actual->hijos[i]);
+      }
+    }
+    
+  }
+
 };
 
-void espacio() {
-	cout << endl;
-}
 
 int main() {
+	int n; // Cantidad de palabras al Trie
 	Trie trie;
+	cin >> n;
+  espacio();
 
-	trie.insertar("HELLO");
-	trie.insertar("HI");
-	trie.insertar("TEABAG");
-	trie.insertar("TEACAN");
+	for (int i = 0; i < n; i++) {
+		string temp;
+		cin >> temp;
+		trie.insertar(temp);
+	}
 
-	Nodo *actual = trie.buscar("");
-	trie.palabrasCon(actual, "", "");
+  espacio();
+  cout << "raiz" << endl;
+  cout << "↓" << endl;
+  trie.dfs(trie.raiz);
+  cout << "fin" << endl;
+  espacio();
+
+	int m; // Cantidad de palabras de busqueda
+	cin >> m;
+  espacio();
+
+	for (int j = 0; j < m; j++) {
+		string temp;
+		cin >> temp;
+
+		cout << trie.busqueda(temp) << endl;
+		// Buscar con DFS al Trie
+    espacio();
+	}
 
 	return 0;
 }
