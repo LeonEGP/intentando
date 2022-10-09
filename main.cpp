@@ -80,7 +80,7 @@ class Trie {
 		}
 
 		//Función que implementa el DFS sobre el Trie, imprime un recorrido sobre el Trie por cada caracter, recibe un apuntador a un Nodo, y no tiene valor de retorno. 
-		void dfs(Nodo* actual) { //Complejidad Computacional: O(676) [Considerada O(1)], teniendo entonces Complejidad Constante.
+		void dfs(Nodo* actual) { //Complejidad Computacional: O(676) EN EL PEOR DE LOS CASOS [Considerada O(1)], teniendo entonces Complejidad Constante.
 			for (int i = 0; i < 26; i++) {
 				if (actual->hijos[i] != NULL) {
 					cout << (char)(i + 'a') << endl;
@@ -91,7 +91,7 @@ class Trie {
 		}
 
 		//Función que implementa el DFS sobre el Trie, imprime las palabras en orden de recorrido, recibe un apuntador a un nodo, un string y no tiene valor de retorno. 
-		void recorridoDFSPorPalabras(Nodo* actual, string palabra) { //Complejidad Computacional: O(676) [Considerada O(1)], teniendo entonces Complejidad Constante.
+		void recorridoDFSPorPalabras(Nodo* actual, string palabra) { //Complejidad Computacional: O(676) EN EL PEOR DE LOS CASOS [Considerada O(1)], teniendo entonces Complejidad Constante.
 			if (actual == NULL)
 				return;
 
