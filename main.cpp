@@ -77,12 +77,30 @@ public:
     
   }
 
+void palabras_ordenadas_dfs(Nodo *actual, string palabra){
+
+  if (actual == NULL) return;
+
+  if (actual->esPalabra)
+    cout << palabra << endl;
+
+  for(int i = 0; i < 26; i++){
+      if (actual->hijos[i]){
+        palabra.push_back(((char) (i + 'a')));
+        palabras_ordenadas_dfs(actual->hijos[i], palabra);
+        palabra.pop_back();
+      }
+    }  
+}
+
 };
 
 
 int main() {
 	int n; // Cantidad de palabras al Trie
 	Trie trie;
+
+  espacio();
 	cin >> n;
   espacio();
 
@@ -91,6 +109,15 @@ int main() {
 		cin >> temp;
 		trie.insertar(temp);
 	}
+
+  espacio();
+  espacio();
+  trie.palabras_ordenadas_dfs(trie.raiz, "");
+  espacio();
+  espacio();
+
+
+  
 
   espacio();
   cout << "raiz" << endl;
@@ -107,7 +134,7 @@ int main() {
 		string temp;
 		cin >> temp;
 
-		cout << trie.busqueda(temp) << endl;
+		cout << (trie.busqueda(temp) ? "TRUE": "FALSE") << endl;
 		// Buscar con DFS al Trie
     espacio();
 	}
