@@ -20,7 +20,7 @@ class Nodo {
 	public:
 		//Atributos de la Clase
 		Nodo* hijos[26];
-		bool esPalabra;
+		bool esPalabra; //Si es lo último perteneciente a la palabra exacta, o en otras palabras: un nodo hoja.
 
 		//Constructor de la Clase Nodo
 		Nodo() { //Complejidad Computacional: O(26) [Pasa a ser O(1)], es una ejecución lineal del contenido de la función. 
