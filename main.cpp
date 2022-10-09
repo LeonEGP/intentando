@@ -1,142 +1,152 @@
+//Programa que: Implementa la estructura Tries y algoritmos DFS. 
+//Programadores: León Emiliano García Pérez [A00573074] y Carla Morales López [A01639225].
+//Fecha de entrega: Sábado 08 de Octubre de 2022.
+
+//Inclusión de librerías.
 #include <iostream>
 #include <string>
 #include <vector>
 
+//Ajuste a estandar.
 using namespace std;
 
-void espacio() {
+//Función que imprime un espacio en consola, no recibe valores, no tiene valor de retorno.
+void espacio() {  //Complejidad Computacional: O(1), es una ejecución lineal del contenido de la función. 
 	cout << endl;
 }
 
+//Definición de la Clase Nodo, la cual se constitiye de un arreglo de Nodos y un booleano que determina si es un nodo final de palabra.
 class Nodo {
-public:
-	Nodo *hijos[26];
-	bool esPalabra;
+	public:
+		//Atributos de la Clase
+		Nodo* hijos[26];
+		bool esPalabra;
 
-	Nodo() {
-		esPalabra = false;
-		for (int i = 0; i < 26; i++) {
-			hijos[i] = NULL;
-		}
-	}
-};
-
-class Trie {
-public:
-
-  Nodo *raiz;
-
-	Trie() {
-		raiz = new Nodo();
-	}
-
-	void insertar(string palabra) {
-		Nodo *actual = raiz;
-
-		for (int i = 0; i < palabra.size(); i++) {
-			int index = palabra[i] - 'a';
-			if (actual->hijos[index] == NULL) {
-				  actual->hijos[index] = new Nodo();
-			  }
-			  actual = actual->hijos[index];
-		}
-		actual->esPalabra = true;
-	}
-
-	bool busqueda(string palabra) {
-		Nodo *actual = raiz;
-
-		for (int i = 0; i < palabra.size(); i++) {
-			int index = palabra[i] - 'a';
-      
-			if (actual->hijos[index] == NULL) {
-        espacio();
-				return false;
+		//Constructor de la Clase Nodo
+		Nodo() { //Complejidad Computacional: O(26) [Pasa a ser O(1)], es una ejecución lineal del contenido de la función. 
+			esPalabra = false;
+			for (int i = 0; i < 26; i++) {
+				hijos[i] = NULL;
 			}
-      // Aquí
-      cout << palabra[i];
-      if (i != palabra.size()-1 && actual->hijos[index]->hijos[palabra[i+1] - 'a'] != NULL){
-        cout << "->";
-      }
-			actual = actual->hijos[index];
 		}
-    espacio();
-		return actual->esPalabra;
-	}
-
-  void dfs(Nodo *actual){
-
-    for(int i = 0; i < 26; i++){
-      if (actual->hijos[i] != NULL){
-        cout << (char) (i + 'a') << endl;
-        
-        cout << "↓" << endl;
-        dfs(actual->hijos[i]);
-      }
-    }
-    
-  }
-
-void palabras_ordenadas_dfs(Nodo *actual, string palabra){
-
-  if (actual == NULL) return;
-
-  if (actual->esPalabra)
-    cout << palabra << endl;
-
-  for(int i = 0; i < 26; i++){
-      if (actual->hijos[i]){
-        palabra.push_back(((char) (i + 'a')));
-        palabras_ordenadas_dfs(actual->hijos[i], palabra);
-        palabra.pop_back();
-      }
-    }  
-}
-
 };
 
+//Definición de la Clase Trie, la cual se constitiye de un apuntador a un Nodo.
+class Trie {
+	public:
+		//Atributos de la Clase
+		Nodo* raiz;
 
-int main() {
-	int n; // Cantidad de palabras al Trie
-	Trie trie;
+		//Constructor de la Clase Trie
+		Trie() { //Complejidad Computacional: O(1), es una ejecución lineal del contenido de la función. 
+			raiz = new Nodo();
+		}
 
-  espacio();
-	cin >> n;
-  espacio();
+		//Función que permita insertar una palabra a la estructura del Trie, recibe un string como parámetro, y no tiene valor de retorno.
+		void insertar(string palabra) { //Complejidad Computacional: O(n), siendo n el tamaño de la palabra a ingresar.
+			Nodo* actual = raiz;
+
+			for (int i = 0; i < palabra.size(); i++) {
+				int index = palabra[i] - 'a';
+				if (actual->hijos[index] == NULL) {
+					actual->hijos[index] = new Nodo();
+				}
+				actual = actual->hijos[index];
+			}
+			actual->esPalabra = true;
+		}
+
+		//Función que permita buscar una palabra en la estructura Trie, recibe el string a buscar, imprime el recorrido a lo largo del mismo y retorna un booleano respecto a si se encuentra la palabra o no. 
+		bool busqueda(string palabra) { //Complejidad Computacional: O(n), siendo n el tamaño de la palabra a ingresar.
+			Nodo* actual = raiz;
+
+			for (int i = 0; i < palabra.size(); i++) {
+				int index = palabra[i] - 'a';
+
+				if (actual->hijos[index] == NULL) {
+					espacio();
+					return false;
+				}
+				cout << palabra[i];
+				if (i != palabra.size() - 1 &&
+					actual->hijos[index]->hijos[palabra[i + 1] - 'a'] != NULL) {
+					cout << "->";
+				}
+				actual = actual->hijos[index];
+			}
+
+			espacio();
+			return actual->esPalabra;
+		}
+
+		//Función que implementa el DFS sobre el Trie, imprimie un recorrido sobre todo el Trie recibe un apuntador a un Nodo, y no tiene valor de retorno. 
+		void dfs(Nodo* actual) { //Complejidad Computacional: O(26) [Pasa a ser O(1)], es una ejecución lineal del contenido de la función. 
+			for (int i = 0; i < 26; i++) {
+				if (actual->hijos[i] != NULL) {
+					cout << (char)(i + 'a') << endl;
+					cout << "↓" << endl;
+					dfs(actual->hijos[i]);
+				}
+			}
+		}
+
+		//Función que implementa el DFS sobre el Trie, imprime las palabras en orden de recorrido, recibe un apuntador a un nodo, un string y no tiene valor de retorno. 
+		void recorridoDFSPorPalabras(Nodo* actual, string palabra) { //Complejidad Computacional: O(26) [Pasa a ser O(1)], es una ejecución lineal del contenido de la función. 
+			if (actual == NULL)
+				return;
+
+			if (actual->esPalabra)
+				cout << palabra << endl;
+
+			for (int i = 0; i < 26; i++) {
+				if (actual->hijos[i]) {
+					palabra.push_back(((char)(i + 'a')));
+					recorridoDFSPorPalabras(actual->hijos[i], palabra);
+					palabra.pop_back();
+				}
+			}
+		}
+};
+
+//Función main de ejecución del programa, no recibe valores, retorna un valor 0 al finalizar la ejecución.
+int main() {//Complejidad Computacional: O(1), es una ejecución lineal del contenido de la función. 
+
+	int n; //Cantidad de palabras a ingresar en el Trie
+	int m; //Cantidad de palabras a buscar dentro del Trie
+	Trie trie; //Declaración del Trie
+
+	espacio();
+	cin >> n; //Ingresa la cantidad de palabras a introducir en el Trie
+	espacio();
 
 	for (int i = 0; i < n; i++) {
 		string temp;
-		cin >> temp;
-		trie.insertar(temp);
+		cin >> temp; //Escribe las palabras
+		trie.insertar(temp); //Se inserta en el Trie
 	}
 
-  espacio();
-  espacio();
-  trie.palabras_ordenadas_dfs(trie.raiz, "");
-  espacio();
-  espacio();
+	espacio();
+	espacio();
+	trie.recorridoDFSPorPalabras(trie.raiz, ""); //Se hace el recorrido del Trie por palabras
+	espacio();
+	espacio();
 
+	espacio();
+	cout << "raiz" << endl;
+	cout << "↓" << endl;
+	trie.dfs(trie.raiz); //Se hace el recorrido del Trie por caracteres
+	cout << "fin" << endl;
+	espacio();
 
-  
-
-  espacio();
-  cout << "raiz" << endl;
-  cout << "↓" << endl;
-  trie.dfs(trie.raiz);
-  cout << "fin" << endl;
-  espacio();
-
-	int m; // Cantidad de palabras de busqueda
-	cin >> m;
-  espacio();
+	cin >> m; //Ingresa la cantidad de palabras a buscar en el Trie
+	espacio();
 
 	for (int j = 0; j < m; j++) {
 		string temp;
-		cin >> temp;
+		cin >> temp; //Escribe las palabras
 
-		cout << (trie.busqueda(temp) ? "TRUE": "FALSE") << endl;
-		// Buscar con DFS al Trie
-    espacio();
+		cout << (trie.busqueda(temp) ? "TRUE" : "FALSE") << endl; //Se realiza la búsqueda de la palabra precisa en el Trie
+		espacio();
 	}
 
 	return 0;
