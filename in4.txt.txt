@@ -1,0 +1,9 @@
+5
+ITACA
+ELIDE
+DELOS
+LACONIA
+OLIMPIA
+2
+esparta
+elide
