@@ -121,6 +121,7 @@ int main() {//Complejidad Computacional: O(1), es una ejecución lineal del cont
 	cin >> n; //Ingresa la cantidad de palabras a introducir en el Trie
 	espacio();
 
+  cout << "INTRODUZCA LAS PALABRAS: " << endl;
 	for (int i = 0; i < n; i++) {
 		string temp;
 		cin >> temp; //Escribe las palabras
@@ -143,6 +144,7 @@ int main() {//Complejidad Computacional: O(1), es una ejecución lineal del cont
 	cin >> m; //Ingresa la cantidad de palabras a buscar en el Trie
 	espacio();
 
+  cout << "INTRODUZCA LAS PALABRAS: " << endl;
 	for (int j = 0; j < m; j++) {
 		string temp;
 		cin >> temp; //Escribe las palabras
