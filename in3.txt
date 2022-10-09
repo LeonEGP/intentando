@@ -1,9 +1,8 @@
 3
-PAN
-ARROZ
-HUEVO
-4
-P
-PA
-PAN
-PANA
+pan
+arroz
+huevo
+3
+panes
+arroces
+huevos
