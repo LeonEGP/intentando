@@ -128,11 +128,11 @@ int main() {//Complejidad Computacional: O(1), es una ejecución lineal del cont
 	}
 
 	espacio();
-	cout << "RECORRIDO DFS SOBRE EL TRIE [POR PALABRAS]: "
+	cout << "RECORRIDO DFS SOBRE EL TRIE [POR PALABRAS]: " << endl;
 	trie.recorridoDFSPorPalabras(trie.raiz, ""); //Se hace el recorrido del Trie por palabras
 
 	espacio();
-	cout << "RECORRIDO DFS SOBRE EL TRIE [POR CARACTERES]: "
+	cout << "RECORRIDO DFS SOBRE EL TRIE [POR CARACTERES]: " << endl;
 	cout << "RAIZ" << endl;
 	cout << "↓" << endl;
 	trie.dfs(trie.raiz); //Se hace el recorrido del Trie por caracteres
