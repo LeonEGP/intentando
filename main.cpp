@@ -79,7 +79,7 @@ class Trie {
 			return actual->esPalabra;
 		}
 
-		//Función que implementa el DFS sobre el Trie, imprimie un recorrido sobre el Trie por cada caractper, recibe un apuntador a un Nodo, y no tiene valor de retorno. 
+		//Función que implementa el DFS sobre el Trie, imprimie un recorrido sobre el Trie por cada caracter, recibe un apuntador a un Nodo, y no tiene valor de retorno. 
 		void dfs(Nodo* actual) { //Complejidad Computacional: O(26) [Pasa a ser O(1)], es una ejecución lineal del contenido de la función. 
 			for (int i = 0; i < 26; i++) {
 				if (actual->hijos[i] != NULL) {
