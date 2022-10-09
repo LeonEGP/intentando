@@ -134,7 +134,7 @@ int main() {//Complejidad Computacional: O(1), es una ejecución lineal en el co
 
 	espacio();
 	cout << "RECORRIDO DFS SOBRE EL TRIE [POR CARACTERES]: " << endl;
-	cout << "RAIZ" << endl;
+	cout << "RAIZ";
 	cout << "->";
 	trie.dfs(trie.raiz); //Se hace el recorrido del Trie por caracteres
 	cout << "FIN" << endl;
