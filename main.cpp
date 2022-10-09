@@ -83,8 +83,8 @@ class Trie {
 		void dfs(Nodo* actual) { //Complejidad Computacional: O(676) EN EL PEOR DE LOS CASOS [Considerada O(1)], teniendo entonces Complejidad Constante.
 			for (int i = 0; i < 26; i++) {
 				if (actual->hijos[i] != NULL) {
-					cout << (char)(i + 'a') << endl;
-					cout << "↓" << endl;
+					cout << (char)(i + 'a');
+					cout << "->";
 					dfs(actual->hijos[i]);
 				}
 			}
@@ -135,7 +135,7 @@ int main() {//Complejidad Computacional: O(1), es una ejecución lineal en el co
 	espacio();
 	cout << "RECORRIDO DFS SOBRE EL TRIE [POR CARACTERES]: " << endl;
 	cout << "RAIZ" << endl;
-	cout << "↓" << endl;
+	cout << "->";
 	trie.dfs(trie.raiz); //Se hace el recorrido del Trie por caracteres
 	cout << "FIN" << endl;
 	espacio();
